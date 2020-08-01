@@ -1,0 +1,226 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Document properties and packages
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\documentclass[a4paper,12pt,final,UTF8,fontset=macnew]{memoir}
+\usepackage{ctex}%中文支持
+\usepackage{newtxtext}
+
+% misc
+%\renewcommand{\familydefault}{bch}	% font
+\pagestyle{empty}					% no pagenumbering
+\setlength{\parindent}{0pt}			% no paragraph indentation
+% required packages (add your own)
+\usepackage{flowfram}% column layou
+\usepackage{marvosym}
+\usepackage{amsmath}
+\usepackage{textcomp}
+\usepackage{varwidth}
+\usepackage{fontawesome}
+\usepackage{color}
+
+\usepackage[top=1cm,left=1cm,right=1cm,bottom=1cm]{geometry}% margins
+\usepackage{graphicx}										% figures
+\usepackage{hyperref}
+\definecolor{linkcolour}{rgb}{0,0.2,0.6}  %蓝色
+\hypersetup{colorlinks,breaklinks,urlcolor=linkcolour, linkcolor=linkcolour}										% URLs
+\usepackage[usenames,dvipsnames]{xcolor}					% color
+\usepackage{multicol}										% columns env.
+	\setlength{\multicolsep}{0pt}
+\usepackage{paralist}										% compact lists
+\usepackage{tikz}
+\usepackage{tikzpeople}
+\usetikzlibrary{shapes.geometric,calc}
+\usepackage{tcolorbox}
+\usepackage{enumitem}
+\newcommand\score[2]{%
+	\pgfmathsetmacro\pgfxa{#1 + 1}%
+	\tikzstyle{scorestars}=[star, star points=5, star point ratio=2.25, draw, inner sep=1.3pt, anchor=outer point 3]%
+	\begin{tikzpicture}[baseline]
+	\foreach \i in {1, ..., #2} {
+		\pgfmathparse{\i<=#1 ? "yellow" : "gray"}
+		\edef\starcolor{\pgfmathresult}
+		\draw (\i*1.75ex, 0) node[name=star\i, scorestars, fill=\starcolor]  {};
+	}
+	\end{tikzpicture}%
+}
+
+
+\setlength{\itemsep}{0.1pt}
+%\usetikzlibrary{shapes.geometric}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Create column layout
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% define length commands
+\setlength{\vcolumnsep}{\baselineskip}
+\setlength{\columnsep}{\vcolumnsep}
+%定义主题颜色，可选颜色 Maroon，ForestGreen，DarkOrchid，RoyalBlue,Turquoise,Cyan,etc,更多颜色参考xcolor包的颜色定义
+\newcommand{\myThemeColor}{RoyalBlue}
+% frame setup (flowfram package)
+% left frame
+\newflowframe{0.23\textwidth}{\textheight}{0pt}{0pt}[left]
+	\newlength{\LeftMainSep}
+	\setlength{\LeftMainSep}{0.23\textwidth}
+	\addtolength{\LeftMainSep}{1\columnsep}
+
+% small static frame for the vertical line
+\newstaticframe{1.5pt}{\textheight}{\LeftMainSep}{0pt}
+
+
+% content of the static frame
+\begin{staticcontents}{1} %绘制分割线，使用tikz包绘制。如需改变风格线样式，请参考tikz教程，对于新手，不建议修改。
+\hfill
+\tikz{%
+	\draw[loosely dotted,color=\myThemeColor,line width=1.5pt,yshift=0]
+	(0,0) -- (0,\textheight);}%
+\hfill\mbox{}
+\end{staticcontents}
+
+% right frame
+\addtolength{\LeftMainSep}{1.5pt}
+\addtolength{\LeftMainSep}{1\columnsep}
+\newflowframe{0.73\textwidth}{\textheight}{\LeftMainSep}{0pt}[main01]
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% define macros (for convience)
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\newcommand{\Sep}{\vspace{1em}}
+\newcommand{\SmallSep}{\vspace{0.9em}}
+
+\newenvironment{AboutMe}
+	{\ignorespaces\textbf{\color{\myThemeColor} About me}}
+	{\Sep\ignorespacesafterend}
+%定义section	
+\newcommand{\CVSection}[1]
+	{\Large\textbf{#1}\par\smallskip
+     \hrule%
+     \smallskip
+	 \normalsize\normalfont}
+
+\newcommand{\CVItem}[1]
+	{\textbf{\color{\myThemeColor} #1}}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Begin document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+\linespread{1.15}\selectfont
+% Left frame 左边内容在此定义
+%%%%%%%%%%%%%%%%%%%%
+\begin{figure}
+\centering
+	\includegraphics[width=0.8\columnwidth]{dog.jpg}
+%\tikz\node[graduate,minimum height=4cm]{};	
+\vspace{-7cm}
+\end{figure}
+\begin{flushright}\footnotesize
+.\\
+\vskip 6cm
+    \raggedright
+	\CVItem{{\large \faInfoCircle 个人信息:}}\\
+	{\zihao{-4}
+	\textcolor{blue}{\faEnvelope} 电子邮件:\\
+	15958174339@163.com \\
+	 \includegraphics[scale=0.07]{csdn.pdf} \hspace{-0.3em} CSDN:\\	
+	 \href{https://blog.csdn.net/weixin_43342986}{\small https://blog.csdn.net/weixin\_ 43342986 } \\
+	\faGithub  \ Github:\\
+	\href{https://github.com/neverland-haha?tab=repositories}{\small https://github.com/neverland-haha?tab=repositories}   \\
+	\textcolor{red}{\faPhone}手机:\\
+	15958174339\\
+	17861511558 \\ }
+	\vspace{3em}
+	\CVItem{{\vspace{-1.2em}\large \faLanguage 语言能力:}}\\
+	
+	{\zihao{-4}\textit{\\ 四级:616\\  六级:520\\
+		    	四级口语:B\\
+		    	六级口语:B+
+			}  }
+	
+	\vspace{3em}
+	\CVItem{{\large \faDesktop 电脑技能:}}\\[1em]
+	\textbf{\zihao{4} \faKeyboardO 编程语言: }\\ 
+	{\zihao{-4}
+	$\bullet$ \textbf{MATLAB:}  	\score{3}{5}  \\
+	$\bullet$ \textbf{Python:}  \score{2}{5} \\
+	$\bullet$ \LaTeX:      \score{3}{5} \\
+	$\bullet$ \textbf{IDL}   \score{2}{5} \\ }
+	\vspace{4.3em}
+	\CVItem{\large  \faLaptop 专业软件:} \\   {\zihao{-4}$\bullet $Envi \score{3}{5}  \\
+		$\bullet$  ArcGis \score{2}{5}  \\
+		$\bullet$	MRT	   \score{2}{5} \\  }
+		\vspace{4.3em}
+	\CVItem{{\large \faThumbsOUp 爱好:}}\\
+	\textit{跑步、打羽毛球、编程、思考、美剧}
+	\SmallSep
+\end{flushright}\normalsize
+\framebreak
+
+
+% Right frame 右边内容在此定义
+%%%%%%%%%%%%%%%%%%%%
+%\Huge\bfseries {\color{\myThemeColor} 某~某~某}\\[-15pt]
+\normalsize\normalfont
+
+% Education
+\CVSection{基本情况} 
+	\begin{table}[h]
+	\small
+	\begin{tabular*}{\textwidth}{l@{\extracolsep{0.4em}}lll}
+	姓名:Neverland!   &   性别:男        &出生年月:1997年8月       \\[1em]
+	籍贯:乌有乡     &现居地:乌托邦       &民族:汉      \\[1em]
+	政治面貌:共青团员    &就读院校:山东种田大学      &本科专业:遥感科学与技术  \\[1em]
+	 英语水平:CET6 &三年成绩: 4.06/5               &专业排名:4/54
+	\end{tabular*}
+	\end{table}
+
+\vspace{1em}
+%self comment
+\CVSection{自我评价及未来打算}
+	 \vspace{1em}
+	 {
+	 \begin{varwidth}{32em}
+	 	 \setlength\parindent{2em}
+	  \par 性格上比较沉稳,对技术有着近乎狂热的追求,有上进心,有较强的实践动能力,接受新知识较为快,倘若无法接受,会花很长的时间去思考,直至明白原理之后再.英语水平较好,喜欢阅读源网站的documentation.善于总结,喜欢通过一些特殊的方式去记录所学的东西.同时擅长反思,喜欢在夜晚的时候跑步总结思考所学和所疑惑.
+	  \par 对夜光遥感非常感兴趣,毕业设计打算利用DMSP和NPP-VIIRS结合人口迁数据况做长三角的经济发展状况的评价.同时对图像处理也较为感兴趣,研究生期间准备攻读图像处理方面的领域.
+	  \end{varwidth}
+	}
+% Experience
+\vspace{2em}
+
+% CAMPU
+\CVSection{综合素质及科研竞赛} 
+	\begin{varwidth}{32em}
+	\begin{enumerate}
+		\item 擅长编程,能够熟练使用MATLAB,\LaTeX.
+		\item 写有20余篇博客,包括MATLAB、\LaTeX、数据下载、数据处理等。
+		\item 主持一项大学生创新创业计划,主要负责数据下载和数据处理.
+		\item 参加大学生数学建模大赛,虽未获奖,但学习了如何阅读文献及、快速分析问题、科学写事项等方面的事项.
+		\item 大三摄影测量课程的专业课程设计用MATLAB纯代码形式写Canny边缘提取的UI.
+		\item 编写了山东农业大学信息学院的\LaTeX 模板。
+	\end{enumerate}
+	\end{varwidth}
+
+% HONORS & SCHOLARSHIPS
+\vspace{2em}
+\CVSection{个人荣誉} 
+\SmallSep
+	\begin{table}[h]
+	\begin{tabular}{l|l}
+		$\Rightarrow$ 2018.05&\textit{大学生英语竞赛三等奖}\footnotesize\\
+		$\Rightarrow$ 2018.09&\textit{山东农业大学优秀学生}\\
+		$\Rightarrow$ 2018.09&\textit{山东农业大学二等奖学金}\\
+		$\Rightarrow$ 2018.10&\textit{大学生数学竞赛省三等奖}\\
+		$\Rightarrow$ 2018.10&\textit{外研杯山东农业大学英语阅读比赛一等奖}\\
+		$\Rightarrow$ 2019.09&\textit{山东农业大学数学建模比赛二等奖}\\
+		$\Rightarrow$ 2019.09&\textit{山东农业大学二等奖学金}\footnotesize\\ 
+		$\Rightarrow$ 2020.07&\textit{编写了山东农业大学\LaTeX 模板，获数学系老师认证}\footnotesize\\
+		$\Rightarrow$ 2020.07&\textit{参加北京师范大学定量遥感暑期学校，获得结业证书}\footnotesize\\
+		
+	\end{tabular}
+\end{table}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% End document
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\end{document} 
